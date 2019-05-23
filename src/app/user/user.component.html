@@ -1,0 +1,37 @@
+<router-outlet #outlet="outlet"></router-outlet>
+<div class="form-modal" *ngIf="outlet.isActivated == false">
+
+    <div class="form-toggle">
+        <button id="login-toggle" (click)="toggleLogin()">log in</button>
+        <button id="signup-toggle" (click)="toggleSignup()">sign up</button>
+    </div>
+
+    <div id="login-form">
+
+        <input type="text" placeholder="Enter username" [(ngModel)]="_userName" />
+        <input type="password" placeholder="Enter password" [(ngModel)]="_password" />
+        <button type="button" class="btn login" (click)="submit()">login</button>
+        <p><a href="javascript:void(0)">Forgotten account</a></p>
+        <hr />
+
+    </div>
+
+    <div id="signup-form">
+
+        <input type="text" placeholder="Choose username" [(ngModel)]="_userName">
+        <input type="password" placeholder="Choose password" [(ngModel)]="_password">
+        <input type="password" placeholder="Choose again your password" [(ngModel)]="_passwordConfirm">
+        <input type="text" placeholder="Choose first name" [(ngModel)]="_firstName">
+        <input type="text" placeholder="Choose last name" [(ngModel)]="_lastName">
+        <input type="text" placeholder="Choose phone number" [(ngModel)]="_phoneNumber">
+        <input type="email" placeholder="Choose email" [(ngModel)]="_email">
+
+        <button type="button" class="btn signup" (click)="register()">create account</button>
+        <p>Clicking <strong>create account</strong> means that you are agree to our <a href="javascript:void(0);">terms
+                of
+                services</a>.</p>
+        <hr>
+
+    </div>
+
+</div>

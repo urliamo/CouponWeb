@@ -1,0 +1,214 @@
+<h2 class="my_name" *ngIf="userService.myName">wellcome back: {{userService.myName.name}}</h2>
+<hr>
+<div>
+    <button (click)="logOut()" class="angle">log out</button>
+</div>
+
+<div class="center">
+
+    <button (click)="getCompany()">show company info</button>
+    <div *ngIf="companyServiceInstance.company">
+        id: {{companyServiceInstance.company.id}} <br>
+        name: {{companyServiceInstance.company.name}} <br>
+        phone number: {{companyServiceInstance.company.phoneNumber}} <br>
+        email: {{companyServiceInstance.company.email}}<br>
+    </div>
+
+    <button (click)="getUser()">show user info</button>
+    <div *ngIf="userServiceInstance.user">
+        user name: {{userServiceInstance.user.userName}} <br>
+        password: {{userServiceInstance.user.password}} <br>
+        companyId: {{userServiceInstance.user.companyId}} <br>
+    </div>
+
+    <div>
+
+        Enter category <select [(ngModel)]="category">
+            <option value="Food">Food</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Restaurant">Restaurant</option>
+            <option value="Vacation">Vacation</option>
+            <option value="Science">Science</option>
+            <option value="Comics">Comics</option>
+            <option value="Paintball">Paintball</option>
+        </select><br>
+        Enter title <input type="text" [(ngModel)]="title"><br>
+        Enter description <input type="text" [(ngModel)]="description"><br>
+        Enter start date <input type="date" [(ngModel)]="startDate"><br>
+        Enter end date <input type="date" [(ngModel)]="endDate"><br>
+        Enter amount<input type="number" [(ngModel)]="amount"><br>
+        Enter price <input type="number" [(ngModel)]="price"><br>
+        Enter image <input type="text" [(ngModel)]="image"><br>
+
+        <button (click)="createCoupon()">create coupon</button>
+
+    </div>
+
+    <div>
+
+        <button (click)="getCompanyCouponsByCompanyId()">get all coupons</button>
+
+        <div *ngIf="couponServiceInstance.getCompanyCouponsByCompanyId">
+
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>category</th>
+                    <th>start date</th>
+                    <th>end date</th>
+                    <th>amount</th>
+                    <th>price</th>
+                    <th>image</th>
+                    <th>delete coupon</th>
+                </tr>
+
+                <tr *ngFor="let coupon of couponServiceInstance.getCompanyCouponsByCompanyId">
+                    <td>{{coupon.id}}</td>
+                    <td>{{coupon.title}}</td>
+                    <td>{{coupon.description}}</td>
+                    <td>{{coupon.category}}</td>
+                    <td>{{coupon.startDate}}</td>
+                    <td>{{coupon.endDate}}</td>
+                    <td>{{coupon.amount}}</td>
+                    <td>{{coupon.price}}</td>
+                    <td>{{coupon.image}}</td>
+                    <td><button (click)="deleteCoupon(coupon.id)" class="angle">delete</button></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div>
+
+        Enter category <select [(ngModel)]="category">
+            <option value="Food">Food</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Restaurant">Restaurant</option>
+            <option value="Vacation">Vacation</option>
+            <option value="Science">Science</option>
+            <option value="Comics">Comics</option>
+            <option value="Paintball">Paintball</option>
+        </select><br>
+        <button (click)="getCompanyCouponsByCategory()">get coupons by category</button>
+
+        <div *ngIf="couponServiceInstance.getCompanyCouponsByCategory">
+
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>category</th>
+                    <th>startDate</th>
+                    <th>endDate</th>
+                    <th>amount</th>
+                    <th>price</th>
+                    <th>image</th>
+                    <th>delete coupon</th>
+                </tr>
+
+                <tr *ngFor="let coupon of couponServiceInstance.getCompanyCouponsByCategory">
+                    <td>{{coupon.id}}</td>
+                    <td>{{coupon.title}}</td>
+                    <td>{{coupon.description}}</td>
+                    <td>{{coupon.category}}</td>
+                    <td>{{coupon.startDate}}</td>
+                    <td>{{coupon.endDate}}</td>
+                    <td>{{coupon.amount}}</td>
+                    <td>{{coupon.price}}</td>
+                    <td>{{coupon.image}}</td>
+                    <td><button (click)="deleteCoupon(coupon.id)" class="angle">delete</button></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div>
+
+        <input type="number" [(ngModel)]="maxPrice">
+        <button (click)="getCompanyCouponsByMaxPrice()">get coupons by max price</button>
+
+        <div *ngIf="couponServiceInstance.getCompanyCouponsByMaxPrice">
+
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>category</th>
+                    <th>start date</th>
+                    <th>end date</th>
+                    <th>amount</th>
+                    <th>price</th>
+                    <th>image</th>
+                    <th>delete coupon</th>
+                </tr>
+
+                <tr *ngFor="let coupon of couponServiceInstance.getCompanyCouponsByMaxPrice">
+                    <td>{{coupon.id}}</td>
+                    <td>{{coupon.title}}</td>
+                    <td>{{coupon.description}}</td>
+                    <td>{{coupon.category}}</td>
+                    <td>{{coupon.startDate}}</td>
+                    <td>{{coupon.endDate}}</td>
+                    <td>{{coupon.amount}}</td>
+                    <td>{{coupon.price}}</td>
+                    <td>{{coupon.image}}</td>
+                    <td><button (click)="deleteCoupon(coupon.id)" class="angle">delete</button></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div>
+
+        <button (click)="updateCoupon()">update coupon</button><br>
+        Enter id <input type="number" [(ngModel)]="couponId"><br>
+        Enter category <select [(ngModel)]="category">
+            <option value="Food">Food</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Restaurant">Restaurant</option>
+            <option value="Vacation">Vacation</option>
+            <option value="Science">Science</option>
+            <option value="Comics">Comics</option>
+            <option value="Paintball">Paintball</option>
+        </select><br>
+        Enter title <input type="text" [(ngModel)]="title"><br>
+        Enter description <input type="text" [(ngModel)]="description"><br>
+        Enter start date <input type="date" [(ngModel)]="startDate"><br>
+        Enter end date <input type="date" [(ngModel)]="endDate"><br>
+        Enter amount<input type="number" [(ngModel)]="amount"><br>
+        Enter price <input type="number" [(ngModel)]="price"><br>
+        Enter image <input type="text" [(ngModel)]="image"><br>
+
+    </div>
+
+    <div>
+
+        <button (click)="updateUser()">update your user</button><br>
+        Enter user name <input type="text" [(ngModel)]="userName"><br>
+        Enter password<input type="text" [(ngModel)]="password"><br>
+
+    </div>
+
+    <div>
+
+        <button (click)="deleteMyUser()" class="delete">delete your account</button>
+
+    </div>
+
+</div>

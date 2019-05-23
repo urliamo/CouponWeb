@@ -1,0 +1,170 @@
+<h2 class="my_name" *ngIf="userService.myName">wellcome back: {{userService.myName.name}}</h2>
+<hr>
+<div>
+    <button (click)="logOut()" class="angle">log out</button>
+</div>
+
+
+<div class="center">
+
+    <div>
+
+        <button (click)="createCompany()">create company</button><br>
+        Enter company name <input type="text" [(ngModel)]="companyName"><br>
+        Enter phone number <input type="text" [(ngModel)]="phoneNumber"><br>
+        Enter email <input type="text" [(ngModel)]="email"><br>
+
+    </div>
+
+    <div>
+
+        <button (click)="updateCompany()">update company</button><br>
+        Enter company id <input type="number" [(ngModel)]="companyId"> <br>
+        Enter company name <input type="text" [(ngModel)]="companyName"><br>
+        Enter phone number <input type="text" [(ngModel)]="phoneNumber"><br>
+        Enter email <input type="text" [(ngModel)]="email"><br>
+
+    </div>
+
+    <div>
+
+        <button (click)="createUser()">create user</button><br>
+        Enter user name <input type="text" [(ngModel)]="userName"><br>
+        Enter password <input type="text" [(ngModel)]="password"><br>
+        Enter company id <input type="number" [(ngModel)]="companyIdUser"><br>
+        Enter type <select [(ngModel)]="type"><br>
+            <option value="Company">Company</option>
+            <option value="Administrator">Administrator</option>
+        </select>
+
+    </div>
+
+    <div>
+
+        <button (click)="updateUser()">update user</button><br>
+        Enter id <input type="number" [(ngModel)]="userId"><br>
+        Enter user name <input type="text" [(ngModel)]="userName"><br>
+        Enter password <input type="text" [(ngModel)]="password"><br>
+
+    </div>
+
+    <div>
+
+        <button (click)="getAllCompanies()">get all companies</button>
+
+        <div *ngIf="companyServiceInstance.allCompanies">
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>phone number</th>
+                    <th>email</th>
+                    <th>delete company</th>
+                </tr>
+                <tr *ngFor="let company of companyServiceInstance.allCompanies">
+                    <td>{{company.id}}</td>
+                    <td>{{company.name}}</td>
+                    <td>{{company.phoneNumber}}</td>
+                    <td>{{company.email}}</td>
+                    <td><button (click)="deleteCompany(company.id)" class="angle">delete</button></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div>
+
+        <button (click)="getAllCustomers()">get all customers</button>
+
+        <div *ngIf="customerServiceInstance.allCustomers">
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>first name</th>
+                    <th>last name</th>
+                    <th>phone number</th>
+                    <th>email</th>
+                </tr>
+                <tr *ngFor="let customer of customerServiceInstance.allCustomers">
+                    <td>{{customer.id}}</td>
+                    <td>{{customer.firstName}}</td>
+                    <td>{{customer.lastName}}</td>
+                    <td>{{customer.phoneNumber}}</td>
+                    <td>{{customer.email}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div>
+
+        <button (click)="getAllPurchases()">get all purchases</button>
+
+        <div *ngIf="purchaseServiceInstance.allPurchases">
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>customer id</th>
+                    <th>coupon id</th>
+                    <th>amount</th>
+                    <th>date</th>
+                </tr>
+                <tr *ngFor="let purchase of purchaseServiceInstance.allPurchases">
+                    <td>{{purchase.id}}</td>
+                    <td>{{purchase.customerId}}</td>
+                    <td>{{purchase.couponId}}</td>
+                    <td>{{purchase.amount}}</td>
+                    <td>{{purchase.date}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div>
+
+        <button (click)="getAllUsers()">get all users</button>
+
+        <div *ngIf="userServiceInstance.allUsers">
+            <table border="1" align="center">
+
+                <tr>
+                    <th>id</th>
+                    <th>user name</th>
+                    <th>password</th>
+                    <th>type</th>
+                    <th>company id</th>
+                    <th>delete user</th>
+                </tr>
+                <tr *ngFor="let user of userServiceInstance.allUsers">
+                    <td>{{user.id}}</td>
+                    <td>{{user.userName}}</td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.type}}</td>
+                    <td>{{user.companyId}}</td>
+                    <td><button *ngIf="availableDelete(user.type,user.id)" (click)="deleteUser(user.id)"
+                            class="angle">delete</button>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <button style="background-color:red" (click)="deleteMyUser()">delete your account</button>
+
+
+</div>

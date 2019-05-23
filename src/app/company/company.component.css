@@ -1,0 +1,18 @@
+.my_name {
+    text-align: center;
+    background-color: cadetblue;
+}
+
+.angle {
+    color: grey;
+    background: oldlace;
+    border-radius: 50px;
+}
+
+.center {
+    text-align: center;
+}
+
+.delete {
+    background: red;
+}
