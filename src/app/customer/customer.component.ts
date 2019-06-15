@@ -18,9 +18,7 @@ export class CustomerComponent implements OnInit {
   private password: string;
   private firstName: string;
   private lastName: string;
-  private phoneNumber: string;
   private email: string;
-
   // amount of purchase
   private amount: number;
 
@@ -77,8 +75,7 @@ export class CustomerComponent implements OnInit {
     customer.id = this.id;
     customer.firstName = this.firstName;
     customer.lastName = this.lastName;
-    customer.phoneNumber = this.phoneNumber;
-    customer.email = this.email;
+    user.email = this.email;
     user.id = this.id;
     user.userName = this.userName;
     user.password = this.password;

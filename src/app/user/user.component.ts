@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { LoginUser } from '../shared/models/LoginUser';
+import { LoginForm } from '../shared/models/LoginForm';
+import { LoginData } from '../shared/models/LoginData';
 import { Customer } from '../shared/models/Customer';
 import { User } from '../shared/models/User';
 import { UserService } from '../shared/services/user.service';
 import { CustomerService } from '../shared/services/customer.service';
+import { Router } from '@angular/router';
 
-@Component({
+@Component({ 
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
@@ -17,36 +19,69 @@ export class UserComponent {
   private _passwordConfirm: string;
   private _firstName: string;
   private _lastName: string;
-  private _phoneNumber: string;
   private _email: string;
 
-  constructor(private userService: UserService, private customerService: CustomerService) { }
+  constructor(private userService: UserService, private customerService: CustomerService, private router: Router) { }
 
   public submit(): void {
 
-    let user: LoginUser = new LoginUser(this._userName, this._password);
+	let user: LoginForm = new LoginForm();
+	user.userName = this._userName;
+	user.password = this._password
 
-    this.userService.login(user);
+	let observable = this.userService.login(user);
+	observable.subscribe
+	(
+	res => {
+
+          if (res.clientType === "Customer")
+            this.router.navigate(["login/customer"]);
+
+          else if (res.clientType === "Company") {
+            this.router.navigate(["login/company"]);
+            sessionStorage.setItem("company", res.companyId + "");
+          }
+
+          else
+            this.router.navigate(["login/administrator"]);
+
+          sessionStorage.setItem("token", res.token + "");
+          sessionStorage.setItem("id", res.id + "");
+          this._userName = null;
+          this._password = null;
+
+        },
+
+        err => alert("Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+
+      );
 
   }
 
   public register(): void {
 
+	let user: User = new User();
+	user.userName = this._userName;
+	user.password = this._password;
+	user.email = this._email;
+	user.type = "Customer";
     let customer: Customer = new Customer();
-    let user: User = new User();
+	customer.firstName = this._firstName;
+	customer.lastName = this._lastName;
+	customer.user = user;
+    if (this._password == this._passwordConfirm){
+	 let observable =  this.customerService.createCustomer(customer);
+		 observable.subscribe
+		(
 
-    customer.firstName = this._firstName;
-    customer.lastName = this._lastName;
-    user.email = this._email;
-    user.password = this._password;
-    user.type = "Customer";
-    customer.user = user;
+          () => alert("your user has been created"),
 
-    if (this._password == this._passwordConfirm)
-      this.customerService.createCustomer(customer);
+          err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
+        );
+	}
     else
-      alert("Your password isn't even, please try again!");
+      alert("password mismatch, please try again!");
 
   }
 

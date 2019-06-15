@@ -112,7 +112,7 @@ export class CompanyComponent implements OnInit {
 
   public deleteMyUser(): void {
 
-    this.userService.deleteMyUser(this.id, this.token);
+    this.userService.deleteMyUser(this.token);
 
   }
 

@@ -14,9 +14,7 @@ import { PurchaseService } from '../shared/services/purshase.service';
 export class AdministratorComponent implements OnInit {
 
   private companyName: string = null;
-  private phoneNumber: string = null;
   private email: string = null;
-
   private companyId: number;
 
   //create user
@@ -58,7 +56,6 @@ export class AdministratorComponent implements OnInit {
 
     let company: Company = new Company();
     company.name = this.companyName;
-    company.phoneNumber = this.phoneNumber;
     company.email = this.email;
 
     this.companyService.createCompany(company, this.token);
@@ -93,7 +90,6 @@ export class AdministratorComponent implements OnInit {
     let company: Company = new Company();
     company.id = this.companyId;
     company.name = this.companyName;
-    company.phoneNumber = this.phoneNumber;
     company.email = this.email;
 
     this.companyService.updateCompany(company, this.token);
@@ -102,7 +98,7 @@ export class AdministratorComponent implements OnInit {
 
   public deleteMyUser() {
 
-    this.userService.deleteMyUser(this.id, this.token);
+    this.userService.deleteMyUser(this.token);
 
   }
 
