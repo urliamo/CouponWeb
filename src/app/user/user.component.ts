@@ -33,20 +33,20 @@ export class UserComponent {
 	observable.subscribe
 	(
 	res => {
-
-          if (res.clientType === "Customer")
-            this.router.navigate(["login/customer"]);
+          if (res.clientType === "Customer"){
+			this.router.navigate(["login/customer"]);
+		  }
 
           else if (res.clientType === "Company") {
             this.router.navigate(["login/company"]);
             sessionStorage.setItem("company", res.companyId + "");
           }
 
-          else
+          else{
             this.router.navigate(["login/administrator"]);
-
+		  }
           sessionStorage.setItem("token", res.token + "");
-          sessionStorage.setItem("id", res.id + "");
+          sessionStorage.setItem("id", res.userId + "");
           this._userName = null;
           this._password = null;
 

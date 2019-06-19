@@ -1,6 +1,6 @@
 export class LoginForm {
-   
-	userName: string;
-    password: string;
-
+    public constructor(
+	public userName: string,
+    public password: string
+	){}
 }

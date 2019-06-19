@@ -1,7 +1,8 @@
 export class LoginData {
-         token: number;
-         clientType: string;
-         id: number;
-         companyId?: number;
- 
+	public constructor(
+         public token: number,
+         public clientType: string,
+         public userId: number,
+         public companyId?: number
+	){}
 }

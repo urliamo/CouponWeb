@@ -1,9 +1,9 @@
 export class Purchase {
-
-    id: number;
-    customerId?: number;
-    couponId: number;
-    amount: number;
-    date?: string;
-
+ public constructor(
+    public purchaseId: number,
+    public customerId?: number,
+    public couponId: number,
+    public amount: number,
+    public date?: string
+ ){}
 }

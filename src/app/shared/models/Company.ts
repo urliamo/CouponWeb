@@ -1,7 +1,7 @@
 export class Company {
-
-    id: number;
-    name: string;
-    email: string;
-
+ public constructor(
+    public companyId: number,
+    public name: string,
+    public email: string
+ ){}
 }

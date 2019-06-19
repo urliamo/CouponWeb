@@ -1,10 +1,10 @@
 import { User } from './User';
 
 export class Customer {
-
-    id?: number;
-    firstName: string;
-    lastName: string;
-    user?: User;
-
+ public constructor(
+    public id?: number,
+    public firstName: string,
+    public lastName: string,
+    public user?: User
+ ){}
 }

@@ -9,7 +9,6 @@ export class AppComponent {
   title = 'coupon center';
 }
 
-
 window.addEventListener('beforeunload', (e) => {
   let token: number = <number><unknown>sessionStorage.getItem("token");
   let observable = this.http.get(`http://localhost:8080/users/logout?token=${token}`);
