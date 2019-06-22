@@ -1,161 +1,73 @@
 import { Injectable } from '@angular/core';
 import { Coupon } from '../models/Coupon';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Category } from '../models/Category';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CouponService {
 
-  public root = {
-    getCompanyCouponsByCompanyId: null,
-    getCompanyCouponsByCategory: null,
-    getCompanyCouponsByMaxPrice: null,
-    getCustomerCouponsByCustomerId: null,
-    getCustomerCouponsByCategory: null,
-    getCustomerCouponsByMaxPrice: null,
-    allCoupons: null
-  }
-
   constructor(private http: HttpClient) { }
 
-  public createCoupon(coupon: Coupon, token: number): void {
+  public createCoupon(coupon: Coupon, token: number): Observable<any> {
 
-    let observable = this.http.post(`http://localhost:8080/coupons?token=${token}`, coupon);
-
-    observable.subscribe(
-
-      () => alert("Your coupon has been created"),
-
-      err => alert("  Error! Status: " + err.status + ".\nMessage: " + err.error.message)
-
-    );
+    return this.http.post(`http://localhost:8080/coupons?token=${token}`, coupon);
 
   }
 
-  public updateCoupon(coupon: Coupon, token: number): void {
+  public updateCoupon(coupon: Coupon, token: number): Observable<any> {
 
-    let observable = this.http.put(`http://localhost:8080/coupons?token=${token}`, coupon);
-
-    observable.subscribe(
-
-      () => alert("Your coupon has been updated"),
-
-      err => alert("  Error! Status: " + err.status + ".\nMessage: " + err.error.message)
-
-    );
+    return this.http.put(`http://localhost:8080/coupons?token=${token}`, coupon);
 
   }
 
-  public deleteCoupon(couponId: number, companyId: number, token: number): void {
+  public deleteCoupon(couponId: number, companyId: number, token: number): Observable<any> {
 
-    let observable = this.http.delete(`http://localhost:8080/coupons/${couponId}?companyId=${companyId}&token=${token}`);
-
-    observable.subscribe(
-
-      () => alert("Your coupon has been deleted"),
-
-      err => alert("  Error! Status: " + err.status + ".\nMessage: " + err.error.message)
-
-    );
+    return this.http.delete(`http://localhost:8080/coupons/${couponId}?companyId=${companyId}&token=${token}`);
 
   }
 
-  public getCompanyCouponsByCompanyId(companyId: number, token: number): void {
+  public getCompanyCouponsByCompanyId(companyId: number, token: number): Observable<Coupon[]> {
 
-    let observable = this.http.get<Coupon[]>(`http://localhost:8080/coupons/company?companyId=${companyId}&token=${token}`);
-
-    observable.subscribe(
-
-      res => this.root.getCompanyCouponsByCompanyId = res,
-
-      err => alert("  Error! Status: " + err.status + ".\nMessage: " + err.error.message)
-
-    );
+    return this.http.get<Coupon[]>(`http://localhost:8080/coupons/company?companyId=${companyId}&token=${token}`);
 
   }
 
-  public getCompanyCouponsByCategory(companyId: number, category: string, token: number): void {
+  public getCompanyCouponsByCategory(companyId: number, category: Category, token: number): Observable<Coupon[]> {
 
-    let observable = this.http.get<Coupon[]>(`http://localhost:8080/coupons/company/category?companyId=${companyId}&category=${category}&token=${token}`);
-
-    observable.subscribe(
-
-      res => this.root.getCompanyCouponsByCategory = res,
-
-      err => alert("  Error! Status: " + err.status + ".\nMessage: " + err.error.message)
-
-    );
+    return this.http.get<Coupon[]>(`http://localhost:8080/coupons/company/category?companyId=${companyId}&category=${category}&token=${token}`);
 
   }
 
-  public getCompanyCouponsByMaxPrice(companyId: number, maxPrice: number, token: number): void {
+  public getCompanyCouponsByMaxPrice(companyId: number, maxPrice: number, token: number): Observable<Coupon[]> {
 
-    let observable = this.http.get<Coupon[]>(`http://localhost:8080/coupons/company/price?companyId=${companyId}&maxPrice=${maxPrice}&token=${token}`);
-
-    observable.subscribe(
-
-      res => this.root.getCompanyCouponsByMaxPrice = res,
-
-      err => alert("  Error! Status: " + err.status + ".\nMessage: " + err.error.message)
-
-    );
+    return this.http.get<Coupon[]>(`http://localhost:8080/coupons/company/price?companyId=${companyId}&maxPrice=${maxPrice}&token=${token}`);
 
   }
 
-  public getCustomerCouponsByCustomerId(customerId: number, token: number): void {
+  public getCustomerCouponsByCustomerId(customerId: number, token: number): Observable<Coupon[]> {
 
-    let observable = this.http.get<Coupon[]>(`http://localhost:8080/coupons/customer?customerId=${customerId}&token=${token}`);
-
-    observable.subscribe(
-
-      res => this.root.getCustomerCouponsByCustomerId = res,
-
-      err => alert("  Error! Status: " + err.status + ".\nMessage: " + err.error.message)
-
-    );
+    return this.http.get<Coupon[]>(`http://localhost:8080/coupons/customer?customerId=${customerId}&token=${token}`);
 
   }
 
-  public getCustomerCouponsByCategory(customerId: number, category: string, token: number): void {
+  public getCustomerCouponsByCategory(customerId: number, category: string, token: number): Observable<Coupon[]> {
 
-    let observable = this.http.get<Coupon[]>(`http://localhost:8080/coupons/customer/category?customerId=${customerId}&category=${category}&token=${token}`);
-
-    observable.subscribe(
-
-      res => this.root.getCustomerCouponsByCategory = res,
-
-      err => alert("  Error! Status: " + err.status + ".\nMessage: " + err.error.message)
-
-    );
+    return this.http.get<Coupon[]>(`http://localhost:8080/coupons/customer/category?customerId=${customerId}&category=${category}&token=${token}`);
 
   }
 
-  public getCustomerCouponsByMaxPrice(customerId: number, maxPrice: number, token: number): void {
+  public getCustomerCouponsByMaxPrice(customerId: number, maxPrice: number, token: number): Observable<Coupon[]> {
 
-    let observable = this.http.get<Coupon[]>(`http://localhost:8080/coupons/customer/price?customerId=${customerId}&maxPrice=${maxPrice}&token=${token}`);
-
-    observable.subscribe(
-
-      res => this.root.getCustomerCouponsByMaxPrice = res,
-
-      err => alert("  Error! Status: " + err.status + ".\nMessage: " + err.error.message)
-
-    );
+    return this.http.get<Coupon[]>(`http://localhost:8080/coupons/customer/price?customerId=${customerId}&maxPrice=${maxPrice}&token=${token}`);
 
   }
 
-  public getAllCoupon(token: number): void {
+  public getAllCoupons(token: number): Observable<Coupon[]> {
 
-    let observable = this.http.get<Coupon[]>(`http://localhost:8080/coupons?token=${token}`);
-
-    observable.subscribe(
-
-      res => this.root.allCoupons = res,
-
-      err => alert("  Error! Status: " + err.status + ".\nMessage: " + err.error.message)
-
-    );
+    return this.http.get<Coupon[]>(`http://localhost:8080/coupons?token=${token}`);
 
   }
 

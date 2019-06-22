@@ -8,9 +8,9 @@
 
     <div id="login-form">
 
-        <input type="text" placeholder="Enter username" [(ngModel)]="_userName" />
-        <input type="password" placeholder="Enter password" [(ngModel)]="_password" />
-        <button type="button" class="btn login" (click)="submit()">login</button>
+        <input type="text" placeholder="Enter username" [(ngModel)]="userName" />
+        <input type="password" placeholder="Enter password" [(ngModel)]="password" />
+        <button type="button" class="btn login" (click)="login()">login</button>
         <p><a href="javascript:void(0)">Forgotten account</a></p>
         <hr />
 
@@ -18,12 +18,12 @@
 
     <div id="signup-form">
 
-        <input type="text" placeholder="Choose username" [(ngModel)]="_userName">
-        <input type="password" placeholder="Choose password" [(ngModel)]="_password">
-        <input type="password" placeholder="Choose again your password" [(ngModel)]="_passwordConfirm">
-        <input type="text" placeholder="Choose first name" [(ngModel)]="_firstName">
-        <input type="text" placeholder="Choose last name" [(ngModel)]="_lastName">
-        <input type="email" placeholder="Choose email" [(ngModel)]="_email">
+        <input type="text" placeholder="Choose username" [(ngModel)]="userName">
+        <input type="password" placeholder="Choose password" [(ngModel)]="password">
+        <input type="password" placeholder="Choose again your password" [(ngModel)]="passwordConfirm">
+        <input type="text" placeholder="Choose first name" [(ngModel)]="firstName">
+        <input type="text" placeholder="Choose last name" [(ngModel)]="lastName">
+        <input type="email" placeholder="Choose email" [(ngModel)]="email">
 
         <button type="button" class="btn signup" (click)="register()">create account</button>
         <p>Clicking <strong>create account</strong> means that you are agree to our <a href="javascript:void(0);">terms

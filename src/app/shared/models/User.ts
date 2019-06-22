@@ -1,10 +1,12 @@
+import { ClientType } from './ClientType';
+
 export class User {
  public constructor(
-    public userid?: number,
-	public email: string,
     public userName: string,
-    public password: string,
-    public clientType: string,
-    public companyId?: string
+	public email: string,
+	public password: string,
+	public userId?: number,
+	public type?:ClientType,
+    public companyId?: number
  ){}
 }

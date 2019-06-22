@@ -1,58 +1,64 @@
-<h2 class="my_name" *ngIf="userService.myName">wellcome back: {{userService.myName.name}}</h2>
-<hr>
-<div>
-    <button (click)="logOut()" class="angle">log out</button>
-</div>
+<h2 class="myName" *ngIf="myName">Wellcome back: {{myName}}</h2>
+<hr class="accessory">
 
+<div>
+    <button (click)="logOut()" class="angle">Log out</button>
+</div>
 
 <div class="center">
 
-    <div>
+    <button (click)="getUser()">Show user info</button> <span> | </span>
+    <button (click)="isToggleCreateUser('Administrator')">Create administrator</button> <span> | </span>
+    <button (click)="isToggleCreateCompany()">Create company</button> <br> <br>
+    <button (click)="getAllUsers()">Get all users</button> <span> | </span>
+    <button (click)="getAllCompanies()">Get all companies</button> <span> | </span>
+    <button (click)="getAllCustomers()">Get all customers</button> <span> | </span>
+    <button (click)="getAllPurchases()">Get all purchases</button> <br> <br>
 
-        <button (click)="createCompany()">create company</button><br>
-        Enter company name <input type="text" [(ngModel)]="companyName"><br>
-        Enter phone number <input type="text" [(ngModel)]="phoneNumber"><br>
-        Enter email <input type="text" [(ngModel)]="email"><br>
+    <div *ngIf="toggleGetUser">
+        <div *ngIf="user">
+
+            User name: {{user.userName}} <br>
+            Password: {{user.password}} <br>
+
+        </div>
+    </div>
+
+    <div *ngIf="toggleCreateCompany">
+
+        Enter company name: <input type="text" [(ngModel)]="companyName"><br>
+        Enter email: <input type="text" [(ngModel)]="email"><br>
+        <button (click)="createCompany()">Create company</button>
 
     </div>
 
-    <div>
+    <div *ngIf="toggleUpdateCompany">
 
-        <button (click)="updateCompany()">update company</button><br>
-        Enter company id <input type="number" [(ngModel)]="companyId"> <br>
-        Enter company name <input type="text" [(ngModel)]="companyName"><br>
-        Enter phone number <input type="text" [(ngModel)]="phoneNumber"><br>
-        Enter email <input type="text" [(ngModel)]="email"><br>
+        Enter company name: <input type="text" [(ngModel)]="companyName"><br>
+        Enter email: <input type="text" [(ngModel)]="email"><br>
+        <button (click)="updateCompany()">Update company</button>
 
     </div>
 
-    <div>
+    <div *ngIf="toggleCreateUser">
 
-        <button (click)="createUser()">create user</button><br>
-        Enter user name <input type="text" [(ngModel)]="userName"><br>
-        Enter password <input type="text" [(ngModel)]="password"><br>
-        Enter company id <input type="number" [(ngModel)]="companyIdUser"><br>
-        Enter type <select [(ngModel)]="type"><br>
-            <option value="Company">Company</option>
-            <option value="Administrator">Administrator</option>
-        </select>
+        Enter user name: <input type="text" [(ngModel)]="userName"><br>
+        Enter password: <input type="password" [(ngModel)]="password"><br>
+        <button (click)="createUser()">Create user</button>
 
     </div>
 
-    <div>
+    <div *ngIf="toggleUpdateUser">
 
-        <button (click)="updateUser()">update user</button><br>
-        Enter id <input type="number" [(ngModel)]="userId"><br>
-        Enter user name <input type="text" [(ngModel)]="userName"><br>
-        Enter password <input type="text" [(ngModel)]="password"><br>
+        Enter user name: <input type="text" [(ngModel)]="userName"><br>
+        Enter password: <input type="password" [(ngModel)]="password"><br>
+        <button (click)="updateUser()">Update user</button>
 
     </div>
 
-    <div>
+    <div *ngIf="toggleGetAllCompanies">
 
-        <button (click)="getAllCompanies()">get all companies</button>
-
-        <div *ngIf="companyServiceInstance.allCompanies">
+        <div *ngIf="allCompanies">
             <table border="1" align="center">
 
                 <tr>
@@ -60,14 +66,18 @@
                     <th>name</th>
                     <th>phone number</th>
                     <th>email</th>
+                    <th>create user</th>
+                    <th>update company</th>
                     <th>delete company</th>
                 </tr>
-                <tr *ngFor="let company of companyServiceInstance.allCompanies">
-                    <td>{{company.id}}</td>
+                <tr *ngFor="let company of allCompanies ; let index = index">
+                    <td>{{company.companyId}}</td>
                     <td>{{company.name}}</td>
-                    <td>{{company.phoneNumber}}</td>
                     <td>{{company.email}}</td>
-                    <td><button (click)="deleteCompany(company.id)" class="angle">delete</button></td>
+                    <td><button (click)="isToggleCreateUser('Company',company.companyId)" class="angle">create user</button>
+                    <td><button (click)="isToggleUpdateCompany(company.companyId)" class="angle">update company</button></td>
+                    <td><button (click)="deleteCompany(company.companyId,index)" class="angle">delete</button></td>
+
                 </tr>
 
             </table>
@@ -76,11 +86,9 @@
 
     </div>
 
-    <div>
+    <div *ngIf="toggleGetAllCustomers">
 
-        <button (click)="getAllCustomers()">get all customers</button>
-
-        <div *ngIf="customerServiceInstance.allCustomers">
+        <div *ngIf="allCustomers">
             <table border="1" align="center">
 
                 <tr>
@@ -90,12 +98,10 @@
                     <th>phone number</th>
                     <th>email</th>
                 </tr>
-                <tr *ngFor="let customer of customerServiceInstance.allCustomers">
+                <tr *ngFor="let customer of allCustomers">
                     <td>{{customer.id}}</td>
                     <td>{{customer.firstName}}</td>
                     <td>{{customer.lastName}}</td>
-                    <td>{{customer.phoneNumber}}</td>
-                    <td>{{customer.email}}</td>
                 </tr>
 
             </table>
@@ -104,11 +110,9 @@
 
     </div>
 
-    <div>
+    <div *ngIf="toggleGetAllPurchases">
 
-        <button (click)="getAllPurchases()">get all purchases</button>
-
-        <div *ngIf="purchaseServiceInstance.allPurchases">
+        <div *ngIf="allPurchases">
             <table border="1" align="center">
 
                 <tr>
@@ -118,8 +122,9 @@
                     <th>amount</th>
                     <th>date</th>
                 </tr>
-                <tr *ngFor="let purchase of purchaseServiceInstance.allPurchases">
-                    <td>{{purchase.id}}</td>
+
+                <tr *ngFor="let purchase of allPurchases">
+                    <td>{{purchase.purchaseId}}</td>
                     <td>{{purchase.customerId}}</td>
                     <td>{{purchase.couponId}}</td>
                     <td>{{purchase.amount}}</td>
@@ -132,11 +137,9 @@
 
     </div>
 
-    <div>
+    <div *ngIf="toggleGetAllUsers">
 
-        <button (click)="getAllUsers()">get all users</button>
-
-        <div *ngIf="userServiceInstance.allUsers">
+        <div *ngIf="allUsers">
             <table border="1" align="center">
 
                 <tr>
@@ -145,17 +148,18 @@
                     <th>password</th>
                     <th>type</th>
                     <th>company id</th>
+                    <th>update user</th>
                     <th>delete user</th>
                 </tr>
-                <tr *ngFor="let user of userServiceInstance.allUsers">
-                    <td>{{user.id}}</td>
+                <tr *ngFor="let user of allUsers ; let index = index">
+                    <td>{{user.userid}}</td>
                     <td>{{user.userName}}</td>
                     <td>{{user.password}}</td>
-                    <td>{{user.type}}</td>
+                    <td>{{user.clientType}}</td>
                     <td>{{user.companyId}}</td>
-                    <td><button *ngIf="availableDelete(user.type,user.id)" (click)="deleteUser(user.id)"
-                            class="angle">delete</button>
-                    </td>
+                    <td> <button (click)="isToggleUpdateUser(user.userid)" class="angle">update user</button></td>
+                    <td><button *ngIf="availableToDelete(user.clientType,user.userid)" (click)="deleteUser(user.userid,index)"
+                            class="angle">delete</button></td>
                 </tr>
 
             </table>
@@ -164,7 +168,7 @@
 
     </div>
 
-    <button style="background-color:red" (click)="deleteMyUser()">delete your account</button>
+    <button style="background-color:red" (click)="deleteMyUser()">Delete your account</button>
 
 
 </div>

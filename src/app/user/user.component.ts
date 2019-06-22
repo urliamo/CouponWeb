@@ -1,91 +1,95 @@
 import { Component } from '@angular/core';
 import { LoginForm } from '../shared/models/LoginForm';
-import { LoginData } from '../shared/models/LoginData';
 import { Customer } from '../shared/models/Customer';
 import { User } from '../shared/models/User';
 import { UserService } from '../shared/services/user.service';
 import { CustomerService } from '../shared/services/customer.service';
 import { Router } from '@angular/router';
+import { ClientType } from '../shared/models/ClientType';
 
-@Component({ 
+@Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
 
-  private _userName: string = null;
-  private _password: string = null;
-  private _passwordConfirm: string;
-  private _firstName: string;
-  private _lastName: string;
-  private _email: string;
+  private userName: string = null;
+  private password: string = null;
+  private passwordConfirm: string = null;
+  private firstName: string = null;
+  private lastName: string = null;
+  private email: string = null;
 
   constructor(private userService: UserService, private customerService: CustomerService, private router: Router) { }
 
-  public submit(): void {
+  public login(): void {
 
-	let user: LoginForm = new LoginForm();
-	user.userName = this._userName;
-	user.password = this._password
+    let user: LoginForm = new LoginForm(this.userName, this.password);
 
-	let observable = this.userService.login(user);
-	observable.subscribe
-	(
-	res => {
-          if (res.clientType === "Customer"){
-			this.router.navigate(["login/customer"]);
-		  }
+    this.userService.login(user).subscribe
 
-          else if (res.clientType === "Company") {
+      (
+
+        res => {
+
+          if (res.type === ClientType.Customer)
+            this.router.navigate(["login/customer"]);
+
+          else if (res.type === ClientType.Company) {
             this.router.navigate(["login/company"]);
             sessionStorage.setItem("company", res.companyId + "");
           }
 
-          else{
+          else
             this.router.navigate(["login/administrator"]);
-		  }
+
           sessionStorage.setItem("token", res.token + "");
           sessionStorage.setItem("id", res.userId + "");
-          this._userName = null;
-          this._password = null;
+          this.userName = null;
+          this.password = null;
 
         },
 
-        err => alert("Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
-      );
+      )
 
   }
 
   public register(): void {
 
-	let user: User = new User();
-	user.userName = this._userName;
-	user.password = this._password;
-	user.email = this._email;
-	user.type = "Customer";
-    let customer: Customer = new Customer();
-	customer.firstName = this._firstName;
-	customer.lastName = this._lastName;
-	customer.user = user;
-    if (this._password == this._passwordConfirm){
-	 let observable =  this.customerService.createCustomer(customer);
-		 observable.subscribe
-		(
+	let user: User = new User( this.userName,this.email, this.password, null, ClientType.Customer, null);
+	alert(user.type);
+    let customer: Customer = new Customer(this.firstName, this.lastName,null, user);
+	alert(customer.user.type);
+    if (this.password != this.passwordConfirm)
+      alert("Your password isn't even, please try again!");
+
+    else {
+
+      this.customerService.createCustomer(customer).subscribe
+
+        (
 
           () => alert("your user has been created"),
 
           err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
         );
-	}
-    else
-      alert("password mismatch, please try again!");
+
+    }
 
   }
 
   public toggleSignup() {
+
+    this.userName = null;
+    this.password = null;
+    this.passwordConfirm = null;
+    this.firstName = null;
+    this.lastName = null;
+    this.email = null;
 
     document.getElementById("login-toggle").style.backgroundColor = "#fff";
     document.getElementById("login-toggle").style.color = "#222";
@@ -97,6 +101,9 @@ export class UserComponent {
   }
 
   public toggleLogin() {
+
+    this.userName = null;
+    this.password = null;
 
     document.getElementById("login-toggle").style.backgroundColor = "#57B846";
     document.getElementById("login-toggle").style.color = "#fff";

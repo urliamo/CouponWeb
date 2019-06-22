@@ -4,11 +4,12 @@ import { Customer } from '../shared/models/Customer';
 import { Purchase } from '../shared/models/Purchase';
 import { CustomerService } from '../shared/services/customer.service';
 import { UserService } from '../shared/services/user.service';
-import { PurchaseService } from '../shared/services/purshase.service';
+import { PurchaseService } from '../shared/services/purchase.service';
 import { CouponService } from '../shared/services/coupon.service';
 import { Router } from '@angular/router';
 import { Coupon } from '../shared/models/Coupon';
 import { Category } from '../shared/models/Category';
+import { ClientType } from '../shared/models/ClientType';
 
 @Component({
   selector: 'app-customer',
@@ -20,14 +21,13 @@ export class CustomerComponent implements OnInit {
   public myName: string = null;
   public token: number = null;
   public id: number = null;
+  private email: string = null;
 
   // update customer
   private userName: string = null;
   private password: string = null;
   private firstName: string = null;
   private lastName: string = null;
-  private phoneNumber: string = null;
-  private email: string = null;
 
   // amount of purchase
   private amount: number = null;
@@ -72,7 +72,7 @@ export class CustomerComponent implements OnInit {
 
       (
 
-        res => this.myName = res.name,
+        res => this.myName = res,
 
         err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
@@ -134,9 +134,9 @@ export class CustomerComponent implements OnInit {
 
   public updateCustomer(): void {
 
-    let type = "Customer";
-    let user: User = new User(this.userName, this.password, this.id, type);
-    let customer: Customer = new Customer(this.firstName, this.lastName, this.phoneNumber, this.email, user, this.id);
+    let type = ClientType.Customer;
+    let user: User = new User(this.email,this.userName, this.password, this.id, type);
+    let customer: Customer = new Customer(this.firstName, this.lastName, this.id, user);
 
     this.customerService.updateCustomer(customer, this.token).subscribe
 
@@ -371,7 +371,6 @@ export class CustomerComponent implements OnInit {
     this.password = null;
     this.firstName = null;
     this.lastName = null;
-    this.phoneNumber = null;
     this.email = null;
 
     this.toggleGetCustomer = false;
