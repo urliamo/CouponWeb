@@ -43,7 +43,8 @@
     <div *ngIf="toggleCreateUser">
 
         Enter user name: <input type="text" [(ngModel)]="userName"><br>
-        Enter password: <input type="password" [(ngModel)]="password"><br>
+		Enter password: <input type="password" [(ngModel)]="password"><br>
+		Enter email: <input type="text" [(ngModel)]="email"><br>
         <button (click)="createUser()">Create user</button>
 
     </div>
@@ -64,7 +65,6 @@
                 <tr>
                     <th>id</th>
                     <th>name</th>
-                    <th>phone number</th>
                     <th>email</th>
                     <th>create user</th>
                     <th>update company</th>
@@ -95,8 +95,6 @@
                     <th>id</th>
                     <th>first name</th>
                     <th>last name</th>
-                    <th>phone number</th>
-                    <th>email</th>
                 </tr>
                 <tr *ngFor="let customer of allCustomers">
                     <td>{{customer.id}}</td>
@@ -152,10 +150,10 @@
                     <th>delete user</th>
                 </tr>
                 <tr *ngFor="let user of allUsers ; let index = index">
-                    <td>{{user.userid}}</td>
+                    <td>{{user.userId}}</td>
                     <td>{{user.userName}}</td>
                     <td>{{user.password}}</td>
-                    <td>{{user.clientType}}</td>
+                    <td>{{user.type}}</td>
                     <td>{{user.companyId}}</td>
                     <td> <button (click)="isToggleUpdateUser(user.userid)" class="angle">update user</button></td>
                     <td><button *ngIf="availableToDelete(user.clientType,user.userid)" (click)="deleteUser(user.userid,index)"

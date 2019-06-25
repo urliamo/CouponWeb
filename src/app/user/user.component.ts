@@ -33,11 +33,11 @@ export class UserComponent {
 
         res => {
 
-          if (res.type === ClientType.Customer)
-            this.router.navigate(["login/customer"]);
+          if (res.clientType === ClientType.Customer)
+            this.router.navigate(["login/customers"]);
 
-          else if (res.type === ClientType.Company) {
-            this.router.navigate(["login/company"]);
+          else if (res.clientType === ClientType.Company) {
+            this.router.navigate(["login/companies"]);
             sessionStorage.setItem("company", res.companyId + "");
           }
 

@@ -110,7 +110,7 @@ export class AdministratorComponent implements OnInit {
 
   public createUser(): void {
 
-    let user: User = new User(this.userEmail,this.userName, this.password, null, this.clientType);
+	let user: User = new User( this.userName,this.email, this.password, null, this.clientType, null);
 
     if (this.clientType === ClientType.Company)
       user.companyId = this.companyUserId;
