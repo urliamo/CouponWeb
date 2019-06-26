@@ -112,7 +112,7 @@ export class CustomerComponent implements OnInit {
 
   public purchaseCoupon(couponId: number, index: number): void {
 
-    let purchse: Purchase = new Purchase(this.id, couponId, this.amount);
+    let purchse: Purchase = new Purchase( couponId, this.amount, this.id);
 
     this.purchaseService.purchaseCoupon(purchse, this.token).subscribe
 

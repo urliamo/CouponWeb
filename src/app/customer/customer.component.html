@@ -97,7 +97,7 @@
           <td>{{coupon.amount}}</td>
           <td>{{coupon.price}}</td>
           <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
-          <td><button (click)="deletePurchaseById(coupon.couponId,coupon.amount,'id',index)" class="angle">delete</button>
+          <td><button (click)="deletePurchaseById(coupon.id,coupon.amount,'id',index)" class="angle">delete</button>
           </td>
         </tr>
       </table>
@@ -137,7 +137,7 @@
           <td>{{coupon.amount}}</td>
           <td>{{coupon.price}}</td>
           <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
-          <td><button (click)="deletePurchaseById(coupon.couponId,coupon.amount,'category',index)"
+          <td><button (click)="deletePurchaseById(coupon.id,coupon.amount,'category',index)"
               class="angle">delete</button>
           </td>
         </tr>
@@ -172,7 +172,7 @@
           <td>{{coupon.amount}}</td>
           <td>{{coupon.price}}</td>
           <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
-          <td><button (click)="deletePurchaseById(coupon.couponId,coupon.amount,'maxPrice',index)"
+          <td><button (click)="deletePurchaseById(coupon.id,coupon.amount,'maxPrice',index)"
               class="angle">delete</button>
           </td>
         </tr>
@@ -207,7 +207,7 @@
           <td>{{coupon.amount}}</td>
           <td>{{coupon.price}}</td>
           <td><img src="/assets/pictures/{{coupon.image}}" class="image"></td>
-          <td><button (click)="purchaseCoupon(coupon.couponId,index)" class="angle">purchse coupon</button></td>
+          <td><button (click)="purchaseCoupon(coupon.id,index)" class="angle">purchse coupon</button></td>
         </tr>
 
       </table>
