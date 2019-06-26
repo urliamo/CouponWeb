@@ -7,7 +7,9 @@ export enum Category {
     Theatre,
     Cinema,
 	Museums,
-	CarRental,
+	Travel,
 	Fashion,
+	Appliances,
+	Groceries,
 
 }
