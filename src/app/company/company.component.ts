@@ -84,7 +84,7 @@ export class CompanyComponent implements OnInit {
 
         () => {
 
-          alert("You are log out!\nWe are waiting for next visit");
+          alert("You are logged out!\nWe hope to see you again!");
           sessionStorage.clear();
           this.router.navigate(["/login"]);
 
