@@ -70,7 +70,7 @@ export class CompanyComponent implements OnInit {
 
       res => this.myName = res,
 
-      err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+      err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
     );
 
@@ -90,7 +90,7 @@ export class CompanyComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -108,7 +108,7 @@ export class CompanyComponent implements OnInit {
 
         () => alert("Your coupon has been created"),
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -125,7 +125,7 @@ export class CompanyComponent implements OnInit {
 
         () => alert("Your coupon has been updated"),
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -148,7 +148,7 @@ export class CompanyComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -174,7 +174,7 @@ export class CompanyComponent implements OnInit {
             this.updateCouponsArray(this.companyCouponsByMaxPrice, index);
 
         },
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -192,7 +192,7 @@ export class CompanyComponent implements OnInit {
           this.router.navigate(["/login"]);
 
         },
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -211,7 +211,7 @@ export class CompanyComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -230,7 +230,7 @@ export class CompanyComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -248,7 +248,7 @@ export class CompanyComponent implements OnInit {
 
         },
 
-        err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+        err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
       );
 
@@ -266,7 +266,7 @@ export class CompanyComponent implements OnInit {
 
           res => this.companyCouponsByCategory = res,
 
-          err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+          err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
         );
 
@@ -287,7 +287,7 @@ export class CompanyComponent implements OnInit {
 
           res => this.companyCouponsByMaxPrice = res,
 
-          err => alert("Oh crap !.... Error! Status: " + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
+          err => alert("HTTP error! code:" + err.error.statusCode + ".\nMessage: " + err.error.externalMessage)
 
         );
 
