@@ -1,6 +1,6 @@
 .image {
-  height: 100px;
-  width: 500px;
+  height: 500px;
+  width: 1920 px;
 }
 
 .accessory {
@@ -27,7 +27,7 @@
 }
 
 .backgroundImage {
-  opacity: 0.6;
+  opacity: 0.8;
   position: absolute;
   z-index: -1;
   width: 100%;

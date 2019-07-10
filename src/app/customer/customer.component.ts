@@ -112,16 +112,16 @@ export class CustomerComponent implements OnInit {
 
   public purchaseCoupon(couponId: number, index: number): void {
 
-    let purchse: Purchase = new Purchase( couponId, this.amount, this.id);
+    let purchase: Purchase = new Purchase( couponId, this.amount, this.id, null);
 
-    this.purchaseService.purchaseCoupon(purchse, this.token).subscribe
+    this.purchaseService.purchaseCoupon(purchase, this.token).subscribe
 
       (
 
         () => {
 
-          this.amountCoupons += purchse.amount;
-          this.allCoupons[index].amount -= purchse.amount;
+          this.amountCoupons += purchase.amount;
+          this.allCoupons[index].amount -= purchase.amount;
 
           alert("Your purchase has been done");
         },
